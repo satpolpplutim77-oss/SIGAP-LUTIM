@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGAP LUTIM - Satpol PP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        select { appearance: none; }
+    </style>
+</head>
+<body class="bg-slate-200">
+
+    <div class="max-w-md mx-auto min-h-screen shadow-2xl relative bg-slate-50">
+        
+        <div class="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 p-10 text-white text-center rounded-b-[3.5rem] shadow-2xl relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full"></div>
+            <div class="absolute -bottom-10 -left-10 w-24 h-24 bg-yellow-400/10 rounded-full"></div>
+            
+            <div class="relative z-10">
+                <i class="fas fa-shield-halved text-4xl mb-3 text-yellow-400 drop-shadow-lg"></i>
+                <h1 class="text-3xl font-extrabold tracking-tighter italic">SIGAP <span class="text-yellow-400 uppercase">Lutim</span></h1>
+                <p class="text-xs font-semibold opacity-80 mt-1 tracking-widest uppercase">Satuan Polisi Pamong Praja</p>
+            </div>
+        </div>
+
+        <div class="px-6 -mt-8 pb-10">
+            <div class="glass-card rounded-3xl p-6 shadow-xl border border-white">
+                <form id="formLaporan" class="space-y-5">
+                    
+                    <div>
+                        <label class="flex items-center gap-2 text-[10px] font-bold text-blue-900 uppercase tracking-widest mb-1.5">
+                            <i class="fas fa-user-shield text-blue-500"></i> Nama Petugas
+                        </label>
+                        <input type="text" id="namaPetugas" required placeholder="Nama lengkap petugas..." 
+                            class="w-full px-4 py-3 bg-slate-100 border-none rounded-2xl focus:ring-4 focus:ring-blue-500/20 outline-none transition-all">
+                    </div>
+
+                    <div>
+                        <label class="flex items-center gap-2 text-[10px] font-bold text-blue-900 uppercase tracking-widest mb-1.5">
+                            <i class="fas fa-users text-blue-500"></i> Komandan Regu (Danru)
+                        </label>
+                        <input type="text" id="namaDanru" required placeholder="Nama Danru piket..." 
+                            class="w-full px-4 py-3 bg-slate-100 border-none rounded-2xl focus:ring-4 focus:ring-blue-500/20 outline-none transition-all">
+                    </div>
+
+                    <div>
+                        <label class="flex items-center gap-2 text-[10px] font-bold text-blue-900 uppercase tracking-widest mb-1.5">
+                            <i class="fas fa-map-marker-alt text-red-500"></i> Pilih Lokasi Jaga
+                        </label>
+                        <div class="relative">
+                            <select id="lokasi" required class="w-full px-4 py-3 bg-slate-100 border-none rounded-2xl focus:ring-4 focus:ring-blue-500/20 outline-none transition-all cursor-pointer">
+                                <option value="" disabled selected>-- Pilih Lokasi --</option>
+                                <option value="Kantor Bupati">Kantor Bupati</option>
+                                <option value="Rujab Bupati">Rujab Bupati</option>
+                                <option value="Rujab Wakil Bupati">Rujab Wakil Bupati</option>
+                                <option value="Kantor DPRD">Kantor DPRD</option>
+                                <option value="Pintu Gerbang Malili">Pintu Gerbang Malili</option>
+                                <option value="Pasar Sentral">Pasar Sentral</option>
+                                <option value="Lainnya">Lainnya...</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-slate-400">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="flex items-center gap-2 text-[10px] font-bold text-blue-900 uppercase tracking-widest mb-1.5">
+                            <i class="fas fa-pen-to-square text-blue-500"></i> Laporan Situasi
+                        </label>
+                        <textarea id="keterangan" rows="3" placeholder="Gambarkan situasi di lapangan..." 
+                            class="w-full px-4 py-3 bg-slate-100 border-none rounded-2xl focus:ring-4 focus:ring-blue-500/20 outline-none transition-all"></textarea>
+                    </div>
+
+                    <div class="bg-blue-50/50 p-4 rounded-2xl border-2 border-dashed border-blue-200 hover:border-blue-400 transition-colors">
+                        <label class="flex flex-col items-center gap-2 cursor-pointer">
+                            <i class="fas fa-camera text-2xl text-blue-600"></i>
+                            <span class="text-[10px] font-bold text-blue-800 uppercase tracking-widest">Ambil Foto Bukti</span>
+                            <input type="file" id="fotoAset" accept="image/*" capture="camera" class="hidden">
+                            <p id="file-chosen" class="text-[10px] text-slate-500 mt-1 italic text-center">Belum ada foto dipilih</p>
+                        </label>
+                    </div>
+
+                    <button type="submit" id="submitBtn" 
+                        class="w-full bg-blue-900 hover:bg-indigo-900 text-white font-extrabold py-4 rounded-2xl shadow-2xl shadow-blue-900/30 transform active:scale-95 transition-all flex items-center justify-center gap-3 ring-4 ring-white">
+                        <i class="fas fa-paper-plane text-yellow-400"></i> 
+                        <span class="tracking-widest uppercase">Kirim Laporan</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <footer class="text-center py-4">
+            <p class="text-[10px] font-bold text-slate-400 tracking-[0.2em]">IT SATPOL PP LUWU TIMUR &copy; 2026</p>
+        </footer>
+    </div>
+
+    <div id="customAlert" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-6 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-8 text-center shadow-2xl max-w-xs w-full border-4 border-blue-900">
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2 uppercase">Laporan Masuk!</h3>
+            <p class="text-xs text-slate-500 mb-6 font-semibold uppercase tracking-tight">Data Situasi Telah Tercatat Di Database.</p>
+            <button onclick="closeAlert()" class="w-full bg-blue-900 text-white font-extrabold py-3 rounded-xl tracking-widest hover:bg-indigo-900 transition-all">OK MANTAP</button>
+        </div>
+    </div>
+
+    <script>
+        // URL SCRIPT KAMU
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzitKY7uLGpBqORO9UNVVxSm3YtRjJ1JvrR0jC5dlep_QCSg5HW-jTY78m7esfPo1pb8Q/exec';
+        
+        const form = document.getElementById('formLaporan');
+        const btn = document.getElementById('submitBtn');
+        const fileInput = document.getElementById('fotoAset');
+        const fileChosen = document.getElementById('file-chosen');
+
+        fileInput.addEventListener('change', function(){
+            fileChosen.textContent = this.files[0] ? "FOTO TERPILIH: " + this.files[0].name.toUpperCase() : "BELUM ADA FOTO DIPILIH";
+            fileChosen.classList.add('text-blue-600', 'font-bold');
+        });
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin text-yellow-400"></i> MENGIRIM...';
+
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const base64 = event.target.result.split(',')[1];
+                    sendToGoogle(base64, file.name);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                sendToGoogle("", "");
+            }
+        });
+
+        function sendToGoogle(base64, fileName) {
+            const payload = {
+                namaPetugas: document.getElementById('namaPetugas').value,
+                namaDanru: document.getElementById('namaDanru').value,
+                lokasi: document.getElementById('lokasi').value,
+                keterangan: document.getElementById('keterangan').value,
+                foto: base64,
+                fotoNama: fileName
+            };
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                document.getElementById('customAlert').classList.remove('hidden');
+                form.reset();
+                fileChosen.textContent = "Belum ada foto dipilih";
+                fileChosen.classList.remove('text-blue-600');
+            })
+            .catch(error => alert("Gagal Kirim Laporan: " + error.message))
+            .finally(() => {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-paper-plane text-yellow-400"></i> KIRIM LAPORAN';
+            });
+        }
+
+        function closeAlert() {
+            document.getElementById('customAlert').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
